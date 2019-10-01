@@ -1,5 +1,7 @@
 # Namespaced Routes Lab
 
+## I had to look at the solution for a lot of this, but in looking at it, I was able to see what was happening, and will be able to refer back to the code to implement it in my own programs in the future. Some heady stuff here.
+
 ## Objectives
 
 1. Organize controllers using a module.
