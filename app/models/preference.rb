@@ -1,11 +1,11 @@
 class Preference < ApplicationRecord
 
-	def self.permit_new_artists
-		self.first.allow_create_artists
+	def permit_new_artists
+		self.allow_create_artists
 	end
 
-	def self.permit_new_songs
-		self.first.allow_create_songs
+	def permit_new_songs
+		self.allow_create_songs
 	end
 
 end

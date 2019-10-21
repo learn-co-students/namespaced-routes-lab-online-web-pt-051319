@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+  before_action :get_preferences, only: [:index, :new]
+
   def index
     if params[:artist_id]
       @artist = Artist.find_by(id: params[:artist_id])
@@ -7,6 +9,8 @@ class SongsController < ApplicationController
       else
         @songs = @artist.songs
       end
+    elsif @preference && @preference.artist_sort_order
+      @songs = Song.order(title: @preference.artist_sort_order)
     else
       @songs = Song.all
     end
@@ -25,7 +29,7 @@ class SongsController < ApplicationController
   end
 
   def new
-    if Preference.permit_new_songs
+    if @preference && @preference.permit_new_songs
       @asong = Song.new
     else
       redirect_to songs_path, alert: 'You do not have permission'
@@ -69,6 +73,10 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit(:title, :artist_name)
+  end
+
+  def get_preferences
+    @preference = Preference.first
   end
 end
 
